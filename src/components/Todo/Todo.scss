@@ -1,0 +1,31 @@
+.todo-item {
+  width: 759px;
+  min-height: 109px;
+  padding: 12px 16px;
+  border: 1px solid #DDDBDA;
+  border-radius: 4px;
+  background: #FFFFFF;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+// .todo-info {
+//   flex: 1;
+// }
+
+.todo-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333333;
+  margin-bottom: 4px;
+}
+
+.todo-description {
+  font-size: 14px;
+  color: #706E6B;
+}
+
+

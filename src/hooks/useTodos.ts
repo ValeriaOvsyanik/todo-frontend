@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Todo } from '../types';
-import { getTodoList, addTodo } from '../api';
+import { getTodoList } from '../api';
 
 export const useTodos = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -14,20 +14,10 @@ export const useTodos = () => {
       const data = await getTodoList();
       setTodos(data);
     } catch (err) {
-      setError('Ошибка загрузки задач');
+      setError('oшибка');
       console.error(err);
     } finally {
       setIsLoading(false);
-    }
-  }, []);
-
-  const createTodo = useCallback(async (title: string, description?: string) => {
-    try {
-      const newTodo = await addTodo(title, description);
-      setTodos((prev) => [...prev, newTodo]);
-    } catch (err) {
-      console.error('Ошибка создания задачи:', err);
-      throw err;
     }
   }, []);
 
@@ -35,6 +25,5 @@ export const useTodos = () => {
     loadTodos();
   }, [loadTodos]);
 
-  // ⚠️ ВАЖНО: здесь должен быть return
-  return { todos, isLoading, error, createTodo, refetch: loadTodos };
+  return { todos, isLoading, error, refetch: loadTodos };
 };
