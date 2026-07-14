@@ -8,7 +8,7 @@ interface TodoProps {
 
 export const Todo: React.FC<TodoProps> = ({ todo }) => {
   return (
-    <li className="todo-item">  {}
+    <li className="todo-item">
       <div className="todo-info">
         <div className="todo-title">{todo.title}</div>
         {todo.description && (
