@@ -1,21 +1,24 @@
 import React, { useState } from 'react';
+import { useCreateTodo } from '../../hooks/useCreateTodo';
 import './TodoForm.scss';
 
 interface TodoFormProps {
-  onCreate: (title: string, description?: string) => Promise<void>;
-  isSubmitting: boolean;
+  onSuccess: () => void;
 }
 
-export const TodoForm: React.FC<TodoFormProps> = ({ onCreate, isSubmitting }) => {
+export const TodoForm: React.FC<TodoFormProps> = ({ onSuccess }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const { createTodo, isSubmitting } = useCreateTodo();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title.trim()) return;
-    await onCreate(title.trim(), description.trim() || undefined);
+    const trimmedTitle = title.trim();
+    if (!trimmedTitle) return;
+    await createTodo(trimmedTitle, description.trim() || undefined);
     setTitle('');
     setDescription('');
+    onSuccess();
   };
 
   return (

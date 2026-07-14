@@ -13,9 +13,8 @@ export const useCreateTodo = () => {
       const newTodo = await addTodo(title, description);
       return newTodo;
     } catch (err) {
-      setError('oшибк');
+      setError('oшибка');
       console.error(err);
-      throw err;
     } finally {
       setIsSubmitting(false);
     }
