@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Todo } from '../types';
-import { getTodoList, deleteTodo } from '../api';
+import { getTodoList} from '../api';
 
 export const useTodos = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -21,19 +21,9 @@ export const useTodos = () => {
     }
   }, []);
 
-    const removeTodo = useCallback(async (id: string) => {
-  try {
-    await deleteTodo(id);
-    setTodos((prev) => prev.filter((todo) => todo.id !== id));
-  } catch (err) {
-    setError('Ошибка удаления');
-    console.error('Ошибка удаления:', err);
-  }
-}, []);
-
   useEffect(() => {
     loadTodos();
   }, [loadTodos]);
 
-  return { todos, isLoading, error, refetch: loadTodos, removeTodo };
+  return { todos, isLoading, error, refetch: loadTodos};
 };
