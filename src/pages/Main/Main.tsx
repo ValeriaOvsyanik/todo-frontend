@@ -7,13 +7,7 @@ import './Main.scss';
 
 export const Main: React.FC = () => {
   const { todos, isLoading, error, refetch } = useTodos();
-  const { deleteTodoItem} = useDeleteTodo();
-  const handleDelete = async (id: string) => {
-    const success = await deleteTodoItem(id);
-    if (success) {
-      refetch();
-    }
-  };
+  const { deleteTodoItem} = useDeleteTodo({ onSuccess: refetch });
 
   return (
     <main className="main-container">
@@ -22,7 +16,7 @@ export const Main: React.FC = () => {
         todos={todos}
         isLoading={isLoading}
         error={error}
-        onDelete={handleDelete}
+        onDelete={deleteTodoItem}
       />
     </main>
   );
