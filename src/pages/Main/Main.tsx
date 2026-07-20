@@ -1,20 +1,23 @@
 import React from 'react';
 import { useTodos } from '../../hooks/useTodos';
-import { Todo } from '../../components/Todo';
+import { useDeleteTodo } from '../../hooks/useDeleteTodo';
 import { TodoForm } from '../../components/TodoForm';
+import { TodoList } from '../../components/TodoList';
 import './Main.scss';
 
 export const Main: React.FC = () => {
-  const { todos, refetch } = useTodos();
+  const { todos, isLoading, error, refetch } = useTodos();
+  const { deleteTodoItem} = useDeleteTodo({ onSuccess: refetch });
 
   return (
-    <div className="main-container">
+    <main className="main-container">
       <TodoForm onSuccess={refetch} />
-      <ul className="main-list">
-        {todos.map((todo) => (
-          <Todo key={todo.id} todo={todo} />
-        ))}
-      </ul>
-    </div>
+      <TodoList
+        todos={todos}
+        isLoading={isLoading}
+        error={error}
+        onDelete={deleteTodoItem}
+      />
+    </main>
   );
 };

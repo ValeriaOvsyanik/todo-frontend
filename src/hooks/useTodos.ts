@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Todo } from '../types';
-import { getTodoList } from '../api';
+import { getTodoList} from '../api';
 
 export const useTodos = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -25,5 +25,5 @@ export const useTodos = () => {
     loadTodos();
   }, [loadTodos]);
 
-  return { todos, isLoading, error, refetch: loadTodos };
+  return { todos, isLoading, error, refetch: loadTodos};
 };
