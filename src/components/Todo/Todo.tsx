@@ -5,9 +5,14 @@ import './Todo.scss';
 interface TodoProps {
   todo: TodoType;
   onDelete: (id: string) => void;
+  onUpdate: (id: string, data: { status?: string; isFavorite?: boolean }) => void;
 }
 
-export const Todo: React.FC<TodoProps> = ({ todo, onDelete }) => {
+export const Todo: React.FC<TodoProps> = ({ todo, onDelete, onUpdate }) => {
+  const handleFavoriteToggle = () => {
+    onUpdate(todo.id, { isFavorite: !todo.isFavorite });
+  };
+
   return (
     <li className="todo-item">
       <article className="todo-info">
@@ -17,13 +22,21 @@ export const Todo: React.FC<TodoProps> = ({ todo, onDelete }) => {
         )}
       </article>
       <div className="todo-actions">
-      <span className={`todo-status todo-status--${todo.status}`}>
-        {todo.status}
-      </span>
-      <button
-      className="todo-delete"
-      onClick={() => onDelete(todo.id)}
-      aria-label='удалить'> 🗑️ </button>
+        <button
+          className="todo-favorite"
+          onClick={handleFavoriteToggle}
+          aria-label={todo.isFavorite ? 'Убрать из избранного' : 'Добавить в избранное'}
+        >
+          {todo.isFavorite ? '❤️' : '🤍'}
+        </button>
+        <span className={`todo-status todo-status--${todo.status}`}>
+          {todo.status}
+        </span>
+        <button
+          className="todo-delete"
+          onClick={() => onDelete(todo.id)}
+          aria-label="Удалить задачу"
+        > 🗑️ </button>
       </div>
     </li>
   );

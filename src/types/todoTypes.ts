@@ -5,4 +5,5 @@ export interface Todo {
   title: string;
   description?: string | null;
   status: TodoStatus;
+  isFavorite: boolean;
 }

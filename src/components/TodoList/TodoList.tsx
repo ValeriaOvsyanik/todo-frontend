@@ -7,6 +7,7 @@ interface TodoListProps {
   isLoading: boolean;
   error: string | null;
   onDelete: (id: string) => void;
+  onUpdate: (id: string, data: { status?: string; isFavorite?: boolean }) => void;
 }
 
 export const TodoList: React.FC<TodoListProps> = ({
@@ -14,6 +15,7 @@ export const TodoList: React.FC<TodoListProps> = ({
   isLoading,
   error,
   onDelete,
+  onUpdate,
 }) => {
   if (isLoading) {
     return (
@@ -43,8 +45,7 @@ export const TodoList: React.FC<TodoListProps> = ({
     <ul className="todo-list">
       {todos.map((todo) => (
         <li key={todo.id}>
-          <Todo todo={todo} onDelete={onDelete}/>
-        
+          <Todo todo={todo} onDelete={onDelete} onUpdate={onUpdate}/>
         </li>
       ))}
     </ul>
